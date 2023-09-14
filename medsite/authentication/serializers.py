@@ -1,0 +1,92 @@
+from collections import defaultdict
+from django.contrib.auth import authenticate, get_user_model
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from rest_framework.validators import UniqueValidator
+from djoser.serializers import UserCreatePasswordRetypeSerializer, UserSerializer, TokenCreateSerializer
+from rest_framework import serializers
+
+from validation.validate_password import validate_password_length, validate_password_include_symbols
+
+
+User = get_user_model()
+
+
+class UserRegistrationSerializer(UserCreatePasswordRetypeSerializer):
+    person_email = serializers.EmailField(write_only=True, validators=[UniqueValidator(
+        queryset=User.objects.all(), message="Email is already registered")])
+    password = serializers.CharField(
+        style={"input_type": "password"}, write_only=True)
+
+    class Meta(UserCreatePasswordRetypeSerializer.Meta):
+        model = User
+        fields = (
+            "person_email",
+            "password",
+            "person_name",
+            "person_surname",
+        )
+
+    def validate(self, value):
+        custom_errors = defaultdict(list)
+        self.fields.pop("re_password", None)
+        re_password = value.pop("re_password")
+        password = value.get("password")
+        try:
+            validate_password_length(password)
+        except ValidationError as error:
+            custom_errors["password"].append(error.message)
+        try:
+            validate_password_include_symbols(password)
+        except ValidationError as error:
+            custom_errors["password"].append(error.message)
+        if value["password"] != re_password:
+            custom_errors["password"].append("Passwords don't match.")
+        if custom_errors:
+            raise serializers.ValidationError(custom_errors)
+        return value
+
+    def create(self, validated_data):
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
+
+
+class UserListSerializer(UserSerializer):
+
+    class Meta(UserSerializer.Meta):
+        model = User
+        fields = (
+            "id",
+            "person_email",
+            "person_name",
+            "person_surname",
+        )
+
+
+class UserTokenCreateSerializer(TokenCreateSerializer):
+    password = serializers.CharField(
+        required=False, style={"input_type": "password"})
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = None
+        self.fields[settings.DJOSER["LOGIN_FIELD"]] = serializers.CharField(
+            required=False)
+
+    def validate(self, value):
+        password = value.get("password")
+        params = {settings.DJOSER["LOGIN_FIELD"]: value.get(settings.DJOSER["LOGIN_FIELD"])}
+        self.user = authenticate(
+            request=self.context.get("request"), password=password, **params
+        )
+        if not self.user:
+            self.user = User.objects.filter(**params).first()
+            if self.user and not self.user.check_password(password):
+                raise serializers.ValidationError({"error":
+                                                   "Email or password is incorrect"})
+        if self.user and self.user.is_active:
+            return value
+        raise serializers.ValidationError({"error":
+                                           "Email or password is incorrect"})
