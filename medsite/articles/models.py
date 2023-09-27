@@ -11,7 +11,6 @@ class Article(models.Model):
     )
     date_of_publishing = models.DateField()
     date_on_site = models.DateField(auto_now_add=True)
-    # publisher =
     authors = models.CharField(max_length=250)
     description = models.CharField(max_length=250)
 

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from corsheaders.defaults import default_headers
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,10 +42,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
+    'rest_framework_simplejwt.token_blacklist',
     'authentication',
     'articles',
     'anketa',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -66,16 +68,16 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost',
     'http://127.0.0.1',
     'http://0.0.0.0',
+    config('CORS_ORIGIN_WHITELIST'),
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
     'http://0.0.0.0',
+
 ]
 
-#For future:
-# CORS_ORIGIN_WHITELIST = os.getenv('CORS_ORIGIN_WHITELIST').split(',')
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'Access-Control-Expose-Headers', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Content-Type'
@@ -105,24 +107,6 @@ WSGI_APPLICATION = 'medsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": config("PG_DB"),
-#         "USER": config("PG_USER"),
-#         "PASSWORD": config("PG_PASSWORD"),
-#         "HOST": config("DB_HOST"),
-#         "PORT": config("DB_PORT"),
-#     }
-# }
-# DATABASE = "simpledbmamager"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -179,7 +163,7 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'authentication.authentication.DjoserTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
 
     ),
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
@@ -193,21 +177,61 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
-    'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
-    'HIDE_USERS': False,
-    'LOGIN_FIELD': 'person_email',
-    'USER_CREATE_PASSWORD_RETYPE': True,
-    'PERMISSIONS': {
-        'user_delete': ['rest_framework.permissions.IsAdminUser'],
-    },
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
 
-    'SERIALIZERS': {
-        'user_create_password_retype': 'authentication.serializers.UserRegistrationSerializer',
-        'user': 'authentication.serializers.UserListSerializer',
-        'current_user': 'authentication.serializers.UserListSerializer',
-        'token_create': 'authentication.serializers.UserTokenCreateSerializer',
-    }
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": "",
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JSON_ENCODER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+
+    "JTI_CLAIM": "jti",
+
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+# DJOSER = {
+#     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+#     'PASSWORD_RESET_CONFIRM_RETYPE': True,
+#     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True,
+#     'HIDE_USERS': False,
+#     'LOGIN_FIELD': 'person_email',
+#     'USER_CREATE_PASSWORD_RETYPE': True,
+#     'PERMISSIONS': {
+#         'user_delete': ['rest_framework.permissions.IsAdminUser'],
+#     },
+#
+#     'SERIALIZERS': {
+#         'user_create_password_retype': 'authentication.serializers.UserRegistrationSerializer',
+#         'user': 'authentication.serializers.UserListSerializer',
+#         'current_user': 'authentication.serializers.UserListSerializer',
+#         'token_create': 'authentication.serializers.UserTokenCreateSerializer',
+#     }
+# }
