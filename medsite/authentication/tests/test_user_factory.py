@@ -4,7 +4,6 @@ from authentication.factories import CustomUserFactory
 
 
 class TestFactories(TestCase):
-
     def test_user_factory(self):
         user = CustomUserFactory()
         self.assertIsNotNone(user.email)

@@ -18,15 +18,14 @@ class UserRegistrationAPITests(APITestCase):
                 "re_password": "Test1234",
                 "name": "Jane",
                 "surname": "Smith",
-
             },
-            format="json"
+            format="json",
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(
-            'jane@test.com',
-            response.json()['email'],
+            "jane@test.com",
+            response.json()["email"],
         )
         self.assertEqual(CustomUser.objects.get(name="Jane").email, "jane@test.com")
         self.assertEqual(CustomUser.objects.get(email="jane@test.com").name, "Jane")
@@ -41,15 +40,11 @@ class UserRegistrationAPITests(APITestCase):
                 "name": "Jane",
                 "surname": "Smith",
             },
-            format="json"
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
-            {
-                "email": [
-                    "Enter a valid email address."
-                ]
-            },
+            {"email": ["Enter a valid email address."]},
             response.json(),
         )
 
@@ -63,13 +58,11 @@ class UserRegistrationAPITests(APITestCase):
                 "name": "Test",
                 "surname": "Test",
             },
-            format="json"
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
-            {
-                'email': ['custom user with this email already exists.']
-            },
+            {"email": ["custom user with this email already exists."]},
             response.json(),
         )
 
@@ -83,7 +76,7 @@ class UserRegistrationAPITests(APITestCase):
                 "name": "Jane",
                 "surname": "Smith",
             },
-            format="json"
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
@@ -91,7 +84,7 @@ class UserRegistrationAPITests(APITestCase):
                 "password": [
                     "Password must be at least 8 characters long.",
                     "Password must include at least one uppercase letter (A-Z), one lowercase letter (a-z) and "
-                    "one digit (0-9)."
+                    "one digit (0-9).",
                 ]
             },
             response.json(),
@@ -105,12 +98,10 @@ class UserRegistrationAPITests(APITestCase):
                 "password": "Test1234",
                 "name": "Jane",
             },
-            format="json"
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(
-            {
-                'surname': ['This field is required.']
-            },
+            {"surname": ["This field is required."]},
             response.json(),
         )
