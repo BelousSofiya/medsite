@@ -10,8 +10,8 @@ class TestArticle(APITestCase):
         self.test_person_is_admin = CustomUserFactory(is_staff=True)
         self.test_person_just_user = CustomUserFactory()
 
-        self.article1 = ArticleFactory(title='article1')
-        self.article2 = ArticleFactory(title='article2')
+        self.article1 = ArticleFactory(title="article1")
+        self.article2 = ArticleFactory(title="article2")
 
     def test_get_all_articles_unauthorized(self):
         response = self.client.get("/api/articles/")
@@ -41,46 +41,71 @@ class TestArticle(APITestCase):
         self.assertEqual(200, response.status_code)
 
     def test_create_article_unauthorized(self):
-        response = self.client.post(path="/api/articles/", data={"title": "health",
-            "content": 'article about health',
-            "date_of_publishing": datetime.now,
-            "authors": 'John Smith',
-            "description": "good article"})
+        response = self.client.post(
+            path="/api/articles/",
+            data={
+                "title": "health",
+                "content": "article about health",
+                "date_of_publishing": datetime.now,
+                "authors": "John Smith",
+                "description": "good article",
+            },
+        )
         self.assertEqual(401, response.status_code)
 
     def test_create_article_just_user(self):
         self.client.force_authenticate(self.test_person_just_user)
-        response = self.client.post(path="/api/articles/", data={"title": "health",
-            "content": "article about health",
-            "date_of_publishing": "2007-01-01",
-            "authors": "John Smith",
-            "description": "good article"})
+        response = self.client.post(
+            path="/api/articles/",
+            data={
+                "title": "health",
+                "content": "article about health",
+                "date_of_publishing": "2007-01-01",
+                "authors": "John Smith",
+                "description": "good article",
+            },
+        )
         self.assertEqual(403, response.status_code)
 
     def test_create_article_is_admin(self):
         self.client.force_authenticate(self.test_person_is_admin)
-        response = self.client.post(path="/api/articles/", data={"title": "health",
-            "content": "article about health",
-            "date_of_publishing": "2007-01-01",
-            "authors": "John Smith",
-            "description": "good article"})
+        response = self.client.post(
+            path="/api/articles/",
+            data={
+                "title": "health",
+                "content": "article about health",
+                "date_of_publishing": "2007-01-01",
+                "authors": "John Smith",
+                "description": "good article",
+            },
+        )
         self.assertEqual(201, response.status_code)
 
     def test_put_article_unauthorized(self):
-        response = self.client.put(path="/api/articles/1/", data={"title": "Gastro",
-            "content": 'article about gastro',
-            "date_of_publishing": datetime.now,
-            "authors": 'John Smith',
-            "description": "good article about gastro"})
+        response = self.client.put(
+            path="/api/articles/1/",
+            data={
+                "title": "Gastro",
+                "content": "article about gastro",
+                "date_of_publishing": datetime.now,
+                "authors": "John Smith",
+                "description": "good article about gastro",
+            },
+        )
         self.assertEqual(401, response.status_code)
 
     def test_put_article_just_user(self):
         self.client.force_authenticate(self.test_person_just_user)
-        response = self.client.put(path="/api/articles/1/", data={"title": "Gastro",
-            "content": 'article about gastro',
-            "date_of_publishing": datetime.now,
-            "authors": 'John Smith',
-            "description": "good article about gastro"})
+        response = self.client.put(
+            path="/api/articles/1/",
+            data={
+                "title": "Gastro",
+                "content": "article about gastro",
+                "date_of_publishing": datetime.now,
+                "authors": "John Smith",
+                "description": "good article about gastro",
+            },
+        )
         self.assertEqual(403, response.status_code)
 
     def test_put_article_is_admin(self):
@@ -88,13 +113,17 @@ class TestArticle(APITestCase):
         response_get = self.client.get("/api/articles/")
         list_of_articles = response_get.data
         article_for_put = list_of_articles[0]
-        response = self.client.put(path=f"/api/articles/{article_for_put['id']}/", data={"title": "Gastro",
-            "content": "article about gastro",
-            "date_of_publishing": "2007-01-01",
-            "authors": "John Smith",
-            "description": "good article about gastro"})
+        response = self.client.put(
+            path=f"/api/articles/{article_for_put['id']}/",
+            data={
+                "title": "Gastro",
+                "content": "article about gastro",
+                "date_of_publishing": "2007-01-01",
+                "authors": "John Smith",
+                "description": "good article about gastro",
+            },
+        )
         self.assertEqual(200, response.status_code)
-
 
     def test_patch_article_unauthorized(self):
         response = self.client.patch(path="/api/articles/2/", data={"title": "wine"})
@@ -110,7 +139,9 @@ class TestArticle(APITestCase):
         response_get = self.client.get("/api/articles/")
         list_of_articles = response_get.data
         article_for_patch = list_of_articles[0]
-        response = self.client.patch(path=f"/api/articles/{article_for_patch['id']}/", data={"title": "Sport"})
+        response = self.client.patch(
+            path=f"/api/articles/{article_for_patch['id']}/", data={"title": "Sport"}
+        )
         self.assertEqual(200, response.status_code)
 
     def test_delete_article_unauthorized(self):

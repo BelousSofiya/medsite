@@ -3,11 +3,15 @@ from django.contrib.auth import authenticate, get_user_model
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
+
 # from djoser.serializers import UserCreatePasswordRetypeSerializer, UserSerializer, TokenCreateSerializer
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
-from validation.validate_password import validate_password_length, validate_password_include_symbols
+from validation.validate_password import (
+    validate_password_length,
+    validate_password_include_symbols,
+)
 from authentication.models import CustomUser
 
 # User = get_user_model()
@@ -32,11 +36,11 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = (
-                    "email",
-                    "password",
-                    "name",
-                    "surname",
-                )
+            "email",
+            "password",
+            "name",
+            "surname",
+        )
 
     def validate(self, value):
         custom_errors = defaultdict(list)
@@ -61,7 +65,6 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class CustomUserListSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = CustomUser
         fields = (
