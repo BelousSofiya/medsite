@@ -21,7 +21,7 @@ services:
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: medsite_db
-      PGDATABASE: medsite_db
+#      PGDATABASE: medsite_db
       PGPASSWORD: ${PG_PASSWORD}
       PGUSER: ${PG_USER}
     ports:
