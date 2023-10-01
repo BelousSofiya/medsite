@@ -1,7 +1,7 @@
 import CookieConsent from 'react-cookie-consent';
 // import boxcookies.png
 
-const cookieconsent = (
+const cookieconsent =
   <CookieConsent
     style={{ background: '#1F9A7C' }}
     enableDeclineButton={true}
