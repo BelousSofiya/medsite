@@ -18,5 +18,5 @@ linting:
         run: npm ci
 
       - name: Code Linting
-        run: npx run eslint --fix .
+        run: npm run lint 
 
