@@ -1,8 +1,6 @@
 name: EsLint
 
 on: [push, pull_request]
-   branches:
-     - main
 
 linting:
     name: Linting # job name (unique id)
