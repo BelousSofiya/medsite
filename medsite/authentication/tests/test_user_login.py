@@ -7,7 +7,10 @@ from utils.unittest_helper import AnyStr
 class UserLoginAPITests(APITestCase):
     def setUp(self) -> None:
         self.test_person_just_user = CustomUserFactory(
-            email="test@user.com", password="TTTttt123", name="Jane", surname="TTT"
+            email="test@user.com",
+            password="TTTttt123",
+            name="Jane",
+            surname="TTT",
         )
 
     def test_login_just_user(self):
@@ -21,7 +24,9 @@ class UserLoginAPITests(APITestCase):
             },
         )
         self.assertEqual(200, response.status_code)
-        self.assertEqual({"access": AnyStr(), "refresh": AnyStr()}, response.json())
+        self.assertEqual(
+            {"access": AnyStr(), "refresh": AnyStr()}, response.json()
+        )
         self.assertContains(response, "access")
 
     #

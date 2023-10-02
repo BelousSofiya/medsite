@@ -33,7 +33,8 @@ class UserSelfAPITests(APITestCase):
         response = self.client.get(path=f"/api/user/{self.test_user.id}/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
-            {"detail": "Authentication credentials were not provided."}, response.json()
+            {"detail": "Authentication credentials were not provided."},
+            response.json(),
         )
 
     def test_user_update_all_fields_successful(self):
@@ -97,7 +98,8 @@ class UserSelfAPITests(APITestCase):
     def test_user_update_one_field_unsuccessful(self):
         self.client.force_authenticate(self.test_user)
         response = self.client.patch(
-            path=f"/api/user/{self.test_user.id}/", data={"surname": "Petrenko"}
+            path=f"/api/user/{self.test_user.id}/",
+            data={"surname": "Petrenko"},
         )
         self.assertEqual(403, response.status_code)
 
@@ -107,5 +109,6 @@ class UserSelfAPITests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
-            {"detail": "Authentication credentials were not provided."}, response.json()
+            {"detail": "Authentication credentials were not provided."},
+            response.json(),
         )
