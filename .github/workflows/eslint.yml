@@ -20,3 +20,6 @@ linting:
       - name: Code Linting
         run: npm run lint
 
+      -name: Fix linting
+        run: npm run lint:fix
+
