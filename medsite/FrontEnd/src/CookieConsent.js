@@ -4,7 +4,7 @@ import CookieConsent from 'react-cookie-consent';
 const cookieconsent = (
   <CookieConsent
     style={{ background: '#1F9A7C' }}
-    enableDeclineButton={true}
+    enableDeclineButton
     buttonText="Погоджуюсь"
     declineButtonText="Відмовляюсь"
     buttonStyle={{
