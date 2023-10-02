@@ -1,7 +1,17 @@
 [tool.black]
 exclude = '''
+(
   /(
-  */migrations/*
-  | __pycache__
+      \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | */migrations/*
+    | _build
+    | buck-out
+    | build
+    | dist
   )/
-  '''
+)
+'''
