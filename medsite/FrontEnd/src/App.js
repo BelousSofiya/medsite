@@ -5,7 +5,7 @@ import Persons from './components/Persons';
 import cookieconsent from './CookieConsent';
 
 function App() {
-const error_var = 'aaa'
+cons error_var = 'aaa'
   return (
     <div className="App">
       <Persons />
