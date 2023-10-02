@@ -3,8 +3,6 @@ exclude = '''
 (
   /(
       \.git
-    | \.hg
-    | \.mypy_cache
     | \.venv
     | */migrations/*
     | _build
