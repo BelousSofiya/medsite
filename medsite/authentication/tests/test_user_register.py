@@ -27,8 +27,12 @@ class UserRegistrationAPITests(APITestCase):
             "jane@test.com",
             response.json()["email"],
         )
-        self.assertEqual(CustomUser.objects.get(name="Jane").email, "jane@test.com")
-        self.assertEqual(CustomUser.objects.get(email="jane@test.com").name, "Jane")
+        self.assertEqual(
+            CustomUser.objects.get(name="Jane").email, "jane@test.com"
+        )
+        self.assertEqual(
+            CustomUser.objects.get(email="jane@test.com").name, "Jane"
+        )
 
     def test_register_user_email_incorrect(self):
         response = self.client.post(

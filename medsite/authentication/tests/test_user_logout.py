@@ -23,7 +23,8 @@ class UserLogoutAPITests(APITestCase):
             HTTP_AUTHORIZATION=f"Bearer {self.test_user_token['access']}"
         )
         response = self.client.post(
-            path="/api/logout/", data={"refresh": self.test_user_token["refresh"]}
+            path="/api/logout/",
+            data={"refresh": self.test_user_token["refresh"]},
         )
         self.assertEqual(205, response.status_code)
 
@@ -32,5 +33,6 @@ class UserLogoutAPITests(APITestCase):
         response = self.client.post(path="/api/logout/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(
-            {"detail": "Authentication credentials were not provided."}, response.json()
+            {"detail": "Authentication credentials were not provided."},
+            response.json(),
         )

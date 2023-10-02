@@ -37,7 +37,9 @@ class TestArticle(APITestCase):
         response_get = self.client.get("/api/articles/")
         list_of_articles = response_get.data
         article_for_get = list_of_articles[0]
-        response = self.client.get(path=f"/api/articles/{article_for_get['id']}/")
+        response = self.client.get(
+            path=f"/api/articles/{article_for_get['id']}/"
+        )
         self.assertEqual(200, response.status_code)
 
     def test_create_article_unauthorized(self):
@@ -126,12 +128,16 @@ class TestArticle(APITestCase):
         self.assertEqual(200, response.status_code)
 
     def test_patch_article_unauthorized(self):
-        response = self.client.patch(path="/api/articles/2/", data={"title": "wine"})
+        response = self.client.patch(
+            path="/api/articles/2/", data={"title": "wine"}
+        )
         self.assertEqual(401, response.status_code)
 
     def test_patch_article_just_user(self):
         self.client.force_authenticate(self.test_person_just_user)
-        response = self.client.patch(path="/api/articles/2/", data={"title": "wine"})
+        response = self.client.patch(
+            path="/api/articles/2/", data={"title": "wine"}
+        )
         self.assertEqual(403, response.status_code)
 
     def test_patch_article_is_admin(self):
@@ -140,7 +146,8 @@ class TestArticle(APITestCase):
         list_of_articles = response_get.data
         article_for_patch = list_of_articles[0]
         response = self.client.patch(
-            path=f"/api/articles/{article_for_patch['id']}/", data={"title": "Sport"}
+            path=f"/api/articles/{article_for_patch['id']}/",
+            data={"title": "Sport"},
         )
         self.assertEqual(200, response.status_code)
 
@@ -158,7 +165,9 @@ class TestArticle(APITestCase):
         response_get = self.client.get("/api/articles/")
         list_of_articles = response_get.data
         article_for_delete = list_of_articles[0]
-        response = self.client.delete(path=f"/api/articles/{article_for_delete['id']}/")
+        response = self.client.delete(
+            path=f"/api/articles/{article_for_delete['id']}/"
+        )
         self.assertEqual(204, response.status_code)
 
     def test_delete_articles_not_exists_is_staff(self):
