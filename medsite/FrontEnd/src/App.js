@@ -6,7 +6,6 @@ import cookieconsent from './CookieConsent'
 const abra = 'abra'
 
 function App() {
-  err_var = 'aaa'
   return (
     <div className="App">
       <Persons />

@@ -1,6 +1,6 @@
 import CookieConsent from 'react-cookie-consent';
 // import boxcookies.png
-
+ code_err = 'aaa'
 const cookieconsent =
   <CookieConsent
     style={{ background: '#1F9A7C' }}
