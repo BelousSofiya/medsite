@@ -1,6 +1,6 @@
 name: EsLint
 
-on: [push, pull_request]
+on: pull_request
 
 linting:
     name: Linting # job name (unique id)

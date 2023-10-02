@@ -2,9 +2,10 @@ import './App.css';
 //import Person from './components/Person';
 //import persons from './data/persons';
 import Persons from './components/Persons';
-import cookieconsent from './CookieConsent'
+import cookieconsent from './CookieConsent';
 
 function App() {
+  error_var = 'aaa';
   return (
     <div className="App">
       <Persons />
@@ -13,4 +14,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
