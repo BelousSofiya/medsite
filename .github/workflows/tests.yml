@@ -30,6 +30,11 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
 #        # Set health checks to wait until postgres has started
+          POSTGRES_DB: medsite_db
+            # optional (defaults to `5432`)
+          POSTGRES_PORT: 5432
+            # optional (defaults to `postgres`)
+          POSTGRES_USER: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,6 +44,18 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
     steps:
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+
+          # queries database with postgres client
+      - name: Query database
+        run: psql -h postgres -d medsite_db -U postgres -c 'SELECT 1;'
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
         with:
