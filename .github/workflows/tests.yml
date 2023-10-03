@@ -52,10 +52,14 @@ jobs:
           # queries database with postgres client
       - name: Query database
         run: psql -h postgres -d medsite_db -U postgres -c 'SELECT 1;'
+        working-directory: ./postgres
         env:
+
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v3
         with:
