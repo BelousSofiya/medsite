@@ -52,6 +52,6 @@ jobs:
       - name: Create Migrations
         run: |
           python medsite/manage.py makemigrations
-          python medsite/manage.py migrate authentication
+          python medsite/manage.py migrate
       - name: running tests
         run: python medsite/manage.py test articles.tests
