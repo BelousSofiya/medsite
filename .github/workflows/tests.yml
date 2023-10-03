@@ -32,4 +32,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r medsite/requirements.txt
       - name: running tests
-        run: python manage.py test
+        run: python ../manage.py test
