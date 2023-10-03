@@ -6,7 +6,8 @@ env:
   PG_DB: medsite_db
   PG_USER: postgres
   PG_PASSWORD: postgres
-  DB_HOST: database
+#  DB_HOST: database
+  DB_HOST: 127.0.0.1
   DB_PORT: 5432
   EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
   EMAIL_HOST: smtp.gmail.com
