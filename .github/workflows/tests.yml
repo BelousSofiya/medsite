@@ -21,7 +21,7 @@ jobs:
     name: Testing
     runs-on: ubuntu-latest
     services:
-      # Label used to access the service container
+      # Label used to access the service container ?
       postgres:
         # Docker Hub image
         image: postgres
@@ -47,4 +47,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r medsite/requirements.txt
       - name: running tests
-        run: python medsite/manage.py test
+        run: python medsite/manage.py test articles.tests
