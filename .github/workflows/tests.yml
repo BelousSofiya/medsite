@@ -28,10 +28,10 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_USER: ${PG_USER}
-            POSTGRES_PASSWORD: ${PG_PASSWORD}
-            POSTGRES_DB: medsite_db
-            PGPASSWORD: ${PG_PASSWORD}
-            PGUSER: ${PG_USER}
+          POSTGRES_PASSWORD: ${PG_PASSWORD}
+          POSTGRES_DB: medsite_db
+          PGPASSWORD: ${PG_PASSWORD}
+          PGUSER: ${PG_USER}
         #          POSTGRES_PASSWORD: postgres
 #        # Set health checks to wait until postgres has started
         options: >-
