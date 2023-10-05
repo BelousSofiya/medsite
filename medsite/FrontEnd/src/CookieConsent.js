@@ -19,7 +19,7 @@ const cookieconsent = (
       fontSize: '15px',
       borderRadius: '4px',
     }}
-    children={<image src="cookieimg/boxcookies.png" />}
+    // children={<image src="cookieimg/boxcookies.png" />}
     expires={0}
   >
     Наш веб-сайт використовує файли cookie, щоб покращити ваш досвід. Ви можете
