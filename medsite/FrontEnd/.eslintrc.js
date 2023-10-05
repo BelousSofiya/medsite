@@ -1,5 +1,5 @@
 {
-  "env": {
+  "env" {
     "node": true,
     "jest": true,
     "browser": true,
