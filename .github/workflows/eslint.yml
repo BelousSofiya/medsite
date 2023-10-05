@@ -18,7 +18,8 @@ jobs:
       - name: Install Dependencies
         run: |
           cd medsite
-          npm ci
+          cd FrontEnd
+          npm install
 
       - name: Code Linting
         run: npm run lint
