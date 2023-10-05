@@ -22,4 +22,7 @@ jobs:
           npm install
 
       - name: Code Linting
-        run: npm run lint
+        run: |
+          cd medsite
+          cd FrontEnd
+          npm run lint
