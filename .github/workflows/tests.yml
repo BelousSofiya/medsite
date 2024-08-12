@@ -51,7 +51,7 @@ jobs:
           pip install -r medsite/requirements.txt
       - name: Create Migrations
         run: |
-          python medsite/manage.py makemigrations authentication
-          python medsite/manage.py migrate
+          python medsite/BackEnd/manage.py makemigrations authentication
+          python medsite/BackEnd/manage.py migrate
       - name: running tests
-        run: python medsite/manage.py test articles.tests
+        run: python medsite/BackEnd/manage.py test articles.tests
