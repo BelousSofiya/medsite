@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  api-dev:
+  backend:
     build: ./BackEnd
-    container_name: api-dev
+    container_name: backend
     restart: on-failure
     command: gunicorn --log-level debug medsite.wsgi:application --bind 0.0.0.0:8000
     volumes:
