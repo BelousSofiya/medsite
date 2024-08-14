@@ -9,4 +9,4 @@ services:
     networks:
       - medsite_network
 networks:
-  forum_network:
+  medsite_network:

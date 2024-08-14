@@ -32,28 +32,12 @@ services:
       - ALLOWED_ENV_HOST=${ALLOWED_ENV_HOST}
     networks:
       - medsite_network
-  frontend:
-    container_name: frontend
-    volumes:
-      - static:/home/medsite/app/public/static
-    environment:
-      - REACT_APP_BASE_API_URL=${REACT_APP_BASE_API_URL}
-      - REACT_APP_PUBLIC_URL=${REACT_APP_PUBLIC_URL}
-    ports:
-      - 3000:80
-    build:
-      context: ./FrontEnd
-      target: production
-    networks:
-      - medsite_network
 
 networks:
   medsite_network:
 
 volumes:
   static:
-    external:
-      name: medsite_static
+    name: medsite_static
   media:
-    external:
-      name: medsite_media
+    name: medsite_media
