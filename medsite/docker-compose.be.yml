@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./BackEnd
+    container_name: backend
+    restart: on-failure
+    command: gunicorn --log-level debug medsite.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      # - ./:/Forum
+      - static:/home/medsite/app/public/static
+      - media:/home/medsite/app/public/media
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=${DEBUG}
+      - SECRET_KEY=${SECRET_KEY}
+      - ENGINE=${ENGINE}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - PG_DB=${PG_DB}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - EMAIL_BACKEND=${EMAIL_BACKEND}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - CORS_ORIGIN_WHITELIST=${CORS_ORIGIN_WHITELIST}
+      - ALLOWED_ENV_HOST=${ALLOWED_ENV_HOST}
+    networks:
+      - medsite_network
+
+networks:
+  medsite_network:
+
+volumes:
+  static:
+    name: medsite_static
+  media:
+    name: medsite_media
