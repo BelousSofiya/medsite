@@ -1,5 +1,5 @@
-import HeaderAnt from './HeaderAnt/HeaderAnt';
+import Header from './Header/Header';
 
 export default function Main() {
-  return <HeaderAnt />;
+  return <Header />;
 }
