@@ -10,7 +10,6 @@
 }
 
 .med-site {
-  /* font-family: Inter; */
   font-size: 20px;
   font-style: bold;
   display: flex;
@@ -22,26 +21,13 @@
 
 .log-reg-buttons {
   display: flex;
-
-  /* float: right; */
-  /* align-items: flex-start; */
   gap: 12px;
   position: relative;
-  /* top: 3%; */
   left: 85%;
   bottom: 50%;
-  /* font-size: 15px;
-  font-style: normal; */
-  /* display: flex; */
-  /* flex-direction: column;
-  justify-content: center; */
-  /* align-items: right; */
-  /* margin-right: 4%; */
-  /* margin-top: 3%; */
 }
 
 .button {
-  /* flex-direction: column; */
   display: flex;
   padding: 5px 15px;
   justify-content: center;

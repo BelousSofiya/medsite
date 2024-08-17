@@ -1,5 +1,11 @@
 import Header from './Header/Header';
+import MainMenu from './Header/MainMenu';
 
 export default function Main() {
-  return <Header />;
+  return (
+    <div>
+      <Header />
+      <MainMenu />
+    </div>
+  );
 }
