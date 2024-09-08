@@ -1,10 +1,18 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Basic from './components/Basic/Basic';
+
 import './App.css';
-import Main from './components/Main/Main';
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/*',
+      element: <Basic />,
+    },
+  ]);
   return (
-    <div className="App">
-      <Main />
+    <div>
+      <RouterProvider router={router} />
     </div>
   );
 }
