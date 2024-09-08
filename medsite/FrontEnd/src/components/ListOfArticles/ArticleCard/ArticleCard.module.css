@@ -1,0 +1,47 @@
+.article-card {
+  display: flex;
+  width: 100%;
+  padding: 8px;
+  align-items: flex-start;
+  border-radius: 8px;
+  border: 1px solid var(--main-grey-10, #eeeff1);
+  background: var(--main-white, #fff);
+  opacity: 0.8;
+  box-shadow: 0px 4px 8px 0px rgba(65, 64, 69, 0.2);
+  margin: 30px 30px 30px 30px;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+  transform: scale(1.05);
+}
+
+.article-card__link {
+  display: flex;
+  gap: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 0 0;
+  border-radius: 0px 0px 12px 12px;
+  margin-left: 20px;
+}
+
+.article-title {
+  font-size: 20px;
+  font-style: bold;
+}
+
+.article-text {
+  font-size: 15px;
+}
+
+.article-tags {
+  font-size: 12px;
+}
