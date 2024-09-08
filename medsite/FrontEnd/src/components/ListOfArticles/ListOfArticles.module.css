@@ -1,0 +1,16 @@
+.background {
+  width: 100%;
+  height: 100vh;
+  background-image: url('../../../public/backgroundimgs/nervecellsopacityhalf.com.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+}
+
+.list-container {
+  margin-left: 9%;
+}
