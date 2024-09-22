@@ -1,0 +1,25 @@
+.green-button {
+  color: black;
+  background: #98ffcc;
+  border-color: #98ffcc;
+  border-style: solid;
+  font-size: 15px;
+  border-radius: 4px;
+  margin: 14px;
+  margin-right: 50px;
+  padding: 4px;
+  margin-left: 64px;
+  cursor: pointer;
+}
+.red-button {
+  color: black;
+  background: #fdc3c3;
+  border-color: #fdc3c3;
+  border-style: solid;
+  font-size: 15px;
+  border-radius: 4px;
+  margin: 10px;
+  margin-left: 20px;
+  padding: 4px;
+  cursor: pointer;
+}
