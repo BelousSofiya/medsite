@@ -3,12 +3,12 @@
   background: #98ffcc;
   border-color: #98ffcc;
   border-style: solid;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 4px;
-  margin: 14px;
-  margin-right: 50px;
+  margin: 10px;
+  /* margin-right: 10px; */
   padding: 4px;
-  margin-left: 64px;
+  /* margin-left: 10px; */
   cursor: pointer;
 }
 .red-button {
@@ -16,10 +16,10 @@
   background: #fdc3c3;
   border-color: #fdc3c3;
   border-style: solid;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 4px;
   margin: 10px;
-  margin-left: 20px;
+  /* margin-left: 10px; */
   padding: 4px;
   cursor: pointer;
 }

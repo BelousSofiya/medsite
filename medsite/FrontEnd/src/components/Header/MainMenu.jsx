@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './MainMenu.module.css';
 
 export default function MainMenu() {
@@ -18,9 +18,13 @@ export default function MainMenu() {
   ];
   const renderItems = (item) => {
     return (
-      <div key={item.link} className={styles['menu-item']}>
+      <Link
+        key={item.link}
+        className={styles['menu-item']}
+        to={`${item.title.toLowerCase()}`}
+      >
         {item.title}
-      </div>
+      </Link>
     );
   };
 

@@ -1,5 +1,9 @@
 import styles from './GreenRedButton.module.css';
 
-export default function GreenRedButton({ name, color }) {
-  return <button className={styles[color]}>{name}</button>;
+export default function GreenRedButton({ type, name, color, func }) {
+  return (
+    <button type={type} className={styles[color]} onClick={func}>
+      {name}
+    </button>
+  );
 }
