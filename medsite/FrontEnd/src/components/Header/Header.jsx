@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -6,8 +6,12 @@ export default function Header() {
     <div className={styles['main-header']}>
       <div className={styles['logo']}>MEDsite</div>
       <nav className={styles['log-reg-buttons']}>
-        <div>login</div>
-        <div>register</div>
+        <Link to={'/login'} className={styles['link']}>
+          login
+        </Link>
+        <Link to={'/sign-up'} className={styles['link']}>
+          register
+        </Link>
       </nav>
     </div>
   );

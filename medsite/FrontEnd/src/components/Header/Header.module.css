@@ -21,3 +21,10 @@
   gap: 60px;
   margin-right: 50px;
 }
+
+.link {
+  /* display: flex; */
+  /* gap: 16px; */
+  text-decoration: none;
+  color: black;
+}
