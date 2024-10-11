@@ -1,25 +1,29 @@
 // import { Link } from 'react-router-dom';
 import styles from './SideMenu.module.css';
+import { useTranslation } from 'react-i18next';
 
 export default function SideMenu() {
+  const { t } = useTranslation();
+
   const SideMenuItems = [
     {
-      title: 'Your profile',
+      title: 'profile',
       link: '1',
     },
     {
-      title: 'Your ankets',
+      title: 'ankets',
       link: '2',
     },
     {
-      title: 'Your plans',
+      title: 'plans',
       link: '3',
     },
   ];
   const renderItems = (item) => {
     return (
       <div key={item.link} className={styles['side-menu-item']}>
-        {item.title}
+        {t(item.title)}
+        {/* {item.title} */}
       </div>
     );
   };

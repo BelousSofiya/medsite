@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import styles from './MainMenu.module.css';
+import { useTranslation } from 'react-i18next';
 
 export default function MainMenu() {
+  const { t } = useTranslation();
+
   const MenuItems = [
     {
       title: 'Articles',
@@ -23,7 +26,7 @@ export default function MainMenu() {
         className={styles['menu-item']}
         to={`${item.title.toLowerCase()}`}
       >
-        {item.title}
+        {t(item.title)}
       </Link>
     );
   };
